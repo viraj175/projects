@@ -60,18 +60,18 @@ run: ./binary/final
 	@echo ""
 	@echo "process returned with exit status \$\$?" 
 
-final: ./binary/main.o ./binary/hello.o
+final: ./binary/main.o ./binary/foo.o
 	@echo "Your binary is built, type \"make run\" to execute!"
-	@gcc \$(CFLAGS) ./binary/main.o ./binary/calc.o -o final
+	@gcc \$(CFLAGS) ./binary/main.o ./binary/foo.o -o final
 	@mv final ./binary/
 
 ./binary/main.o: ./src/main.c
 	@gcc \$(CFLAGS) -c ./src/main.c
 	@mv main.o ./binary/
 
-./binary/hello.o: ./src/calc.c
-	@gcc \$(CFLAGS) -c ./src/calc.c
-	@mv calc.o ./binary/
+./binary/foo.o: ./src/foo.c
+	@gcc \$(CFLAGS) -c ./src/foo.c
+	@mv foo.o ./binary/
 
 clean: 
 	@echo "Removing object files"
