@@ -1,16 +1,24 @@
 #!/bin/bash
 
+# ANSI color codes
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[0;33m"
+BLUE="\033[0;34m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
 # Creating folders with project name
 if [ -z "$1" ]; then
     echo "No folder name provided!"
-    echo "usage: $0 <folder_name>"
+    echo -e "usage: $0 ${BLUE}${BOLD}<folder_name>${RESET}"
     exit 1
 fi
 
 folder_name=$1
 
 if [ -d "$1" ]; then
-    echo "Folder "$folder_name" already exist"
+    echo -e "Folder ${RED}${BOLD}$folder_name${RESET} already exist"
     exit 1
 fi
 
@@ -24,7 +32,7 @@ touch ./"$folder_name"/lib/functions.h
 
 # Providing basic code template to main.c
 cat << EOF > "./$folder_name/src/main.c"
-#include "functions.h"
+#include "../lib/functions.h"
 
 int main (int argc, char **argv) {
 
@@ -34,7 +42,7 @@ EOF
 
 # Providing basic code template to foo.c
 cat << EOF > "./$folder_name/src/foo.c"
-#include "functions.h"
+#include "../lib/functions.h"
 
 EOF
 
@@ -78,3 +86,4 @@ clean:
 	rm ./binary/*.o
 EOF
 
+echo -e "     ${GREEN}${BOLD}Created${RESET} binary (application) $folder_name packege"
